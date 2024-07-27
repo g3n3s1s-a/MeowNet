@@ -30,19 +30,10 @@ class MeowNet(nn.Module):
         x = self.pool(x)
         x = F.relu(self.conv6(x))
         x = self.pool(x)
-        #x = x.view(-1, 256 * 4 * 4)  # Adjust according to the new feature map size
-        #x = F.relu(self.fc1(x))
-        #x = F.relu(self.fc2(x))
-        #x = F.log_softmax(self.fc3(x), dim=1)  # Output should be 12
-           # Add debugging print statements
-        #print(f"Shape before view: {x.shape}")
         x = x.view(x.size(0), -1)  # Maintain batch size, flattening the rest
-        #print(f"Shape after view: {x.shape}")
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
         x = F.log_softmax(self.fc3(x), dim=1)  # Output should be 12
-        #x = self.fc3(x)
-        #print(f"Shape after fc3: {x.shape}")
         return x
 
 def accuracy_fn(y_true, y_pred):
