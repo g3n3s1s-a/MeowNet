@@ -245,6 +245,7 @@ def test_image(model,path,device,classes):
   pred_probs = make_preds(model,[(img.unsqueeze(dim=0),0)],device)
 
   #4. Print image and return what the model guessed it was
+  plt.figure(figsize=(12,12))
   plt.subplot(3,3,2)
   img = img.cpu()
   pred_class = pred_probs.squeeze().cpu()

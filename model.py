@@ -110,9 +110,9 @@ def train(model, train_dataloader,test_dataloader, device,epoch):
   optimizer = torch.optim.Adam(params=model.parameters(),lr= 0.00001)
   EPOCHS = epoch
   model = model.to(device)
-
-  for epoch in tqdm(range(EPOCHS)):
-    print(f'Epoch: {epoch}\n--------')
-    train_step(model,train_dataloader,loss_fn,optimizer,accuracy_fn, device)
-    test_step(model,test_dataloader,loss_fn,accuracy_fn,device)
+  if epoch > 0:
+    for epoch in tqdm(range(EPOCHS)):
+      print(f'Epoch: {epoch}\n--------')
+      train_step(model,train_dataloader,loss_fn,optimizer,accuracy_fn, device)
+      test_step(model,test_dataloader,loss_fn,accuracy_fn,device)
 
