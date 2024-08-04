@@ -107,7 +107,7 @@ def test_step(
 
 def train(model, train_dataloader,test_dataloader, device,epoch):
   loss_fn = nn.CrossEntropyLoss() # measures how wrong the model is
-  optimizer = torch.optim.Adam(params=model.parameters(),lr= 0.00001)
+  optimizer = torch.optim.Adam(params=model.parameters(),lr= 0.0001)
   EPOCHS = epoch
   model = model.to(device)
   if epoch > 0:

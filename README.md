@@ -1,63 +1,73 @@
 # MeowNet
 
-My goal was to build a cnn classifer in PyTorch that can categorize the breed of cats into 12 types: Sphynx, Abyssinian, Ragdoll, Siamese, Birman,British Shorthair, Maine Coon, Persian, Russian Blue, Bengal, Egyptian Mau, and Bombay.
+CNN classifer in PyTorch that can categorize the breed of cats into 12 types: Sphynx, Abyssinian, Ragdoll, Siamese, Birman,British Shorthair, Maine Coon, Persian, Russian Blue, Bengal, Egyptian Mau, and Bombay.
 
-![model_preds.png](assets/model_predictions.png)
-## Description
+## Model's Final Predictions
+![model-preds.png](assets/model_predictions.png)
 
- 
+## Overview & Process 
 
-## Getting Started
+My goal for this project was to get familiar with PyTorch, CNNs, and custom datasets. I also love cats but don't know much about the different breeds. This was my first time working with a custom dataset. The main issue with my dataset was the small size of the images, totaling 6,882 images. To address this, I used data augmentation (i.e., transformations) to increase the dataset size. An argument is provided where you can see how the transformations affect the images.
+![tranformations.png](assets/transformation_MeowNet.png)
 
-### Dependencies
+The architecture of the CNN is very similar to VGG-16, which I chose because of its simplicity. I started this project on Google Colab, but ![Jack](https://github.com/J-Mango-19) showed me how to run PyTorch locally without access to a GPU. For this project, I used MPS, the Metal Performance Shaders backend for GPU training acceleration.
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+For training, I ran about 80 epochs with a learning rate of 0.001 and then lowered the learning rate to 0.0001 for around 30 more epochs.
 
-### Installing
+## Usage
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+### Arguments
+
+Here is the available arguments:
+```
+usage: main.py [-h] [-epoch EPOCH] [-save] [-load] [-view_preds] [-test TEST] [-transform]
+
+options:
+  -h, --help    show this help message and exit
+  -epoch EPOCH  sets the num of epoch (def=10)
+  -save         saves the model
+  -load         loads a state dict
+  -view_preds   view predictions model makes
+  -test TEST    add path to own image to test the mode
+  -transform    view what transformation looks like
+```
+
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+Pretrained weights are saved in this repo!
+
+* Viewing predictions model make
+If you want to load pre-trained weights and view the prediction the model makes follow the command below. 
 ```
-code blocks for commands
+python3 main.py -load -epoch 0 -view_preds
 ```
-
-## Help
-
-Any advise for common problems or issues.
+If you want to continue to train an model and save the weights, change the epoch and follow the command below.
 ```
-command to run if program contains helper info
+python3 main.py -load -epoch EPOCH -save -view_preds
 ```
+* Testing saved model with your own image
+```
+python3 main.py -load -epoch 0 -test {path-to-your-image}
+```
+* View transformations used while training
+```
+python3 main.py -epoch 0 -transform
+```
+## Data
+I combined two datasets in order to have better results
+* [universe.roboflow](https://universe.roboflow.com/cat-breed/cat-breeds-2n7zk and https://www.kaggle.com/datasets/shawngano/gano-cat-breed-image-collection?resource=download)
+* [kaggle](https://universe.roboflow.com/cat-breed/cat-breeds-2n7zk and https://www.kaggle.com/datasets/shawngano/gano-cat-breed-image-collection?resource=download)
 
-## Authors
+My split was rougly 80/20 with 4149 images in my training set and 2733 in my testing set. Efforts were made to have equal amounts of images per breed per set. In the training set, the goal was ~375 images per breed and testing set was ~227 per breed. 
 
-Contributors names and contact info
+## Analysis
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+Training accuracy is ~99.44% and testing accuracy is ~91.5%. I am happy with the results and the errors seem reasonable especially with its small data size. A common mistake I noticed is difficulty classifying between Siamese and Birman or Ragdoll and Persian. This project also raises an interesting question about the potential benefits of using a cat detector to preprocess images before classification.  
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+Inspiration, code snippets, recourses etc.
+* [PyTorch Tutorial](https://youtu.be/Z_ikDlimN6A?si=qe1jZp6Km5sN1j92) This is how I created a custom dataset and data visualization functions 
+* [VGG-16 NN Architecture](https://github.com/kennethleungty/Neural-Network-Architecture-Diagrams) Helps visualize NN arch
+* [Cat Breed Classifer in Keras/TensorFlow](https://github.com/immohann/Cat-Breed-Classifier/blob/master/Cat-Breed-Classifier.ipynb) This repo inspired me to do this project
