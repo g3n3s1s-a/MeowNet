@@ -10,7 +10,7 @@ CNN classifer in PyTorch that can categorize the breed of cats into 12 types: Sp
 My goal for this project was to get familiar with PyTorch, CNNs, and custom datasets. I also love cats but don't know much about the different breeds. This was my first time working with a custom dataset. The main issue with my dataset was the small size of the images, totaling 6,882 images. To address this, I used data augmentation (i.e., transformations) to increase the dataset size. An argument is provided where you can see how the transformations affect the images.
 ![tranformations.png](assets/transformation_MeowNet.png)
 
-The architecture of the CNN is very similar to VGG-16, which I chose because of its simplicity. I started this project on Google Colab, but ![Jack](https://github.com/J-Mango-19) showed me how to run PyTorch locally without access to a GPU. For this project, I used MPS, the Metal Performance Shaders backend for GPU training acceleration.
+The architecture of the CNN is very similar to VGG-16, which I chose because of its simplicity. I started this project on Google Colab, but [Jack](https://github.com/J-Mango-19) showed me how to run PyTorch locally without access to a GPU. For this project, I used MPS, the Metal Performance Shaders backend for GPU training acceleration.
 
 For training, I ran about 80 epochs with a learning rate of 0.001 and then lowered the learning rate to 0.0001 for around 30 more epochs.
 
