@@ -1,6 +1,6 @@
 # MeowNet
 
-CNN classifer in PyTorch that can categorize the breed of cats into 12 types: Sphynx, Abyssinian, Ragdoll, Siamese, Birman,British Shorthair, Maine Coon, Persian, Russian Blue, Bengal, Egyptian Mau, and Bombay.
+CNN classifer in PyTorch that can categorize the breed of cats into 12 types: Abyssinian, Bengal, Birman, Bombay, British Shorthair, Egyptian Mau, Maine Coon, Persian, Ragdoll, Russian Blue, Siamese, Sphynx.
 
 ## Model's Final Predictions
 ![model-preds.png](assets/model_predictions.png)
